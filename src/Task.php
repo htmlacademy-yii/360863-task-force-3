@@ -12,7 +12,7 @@ class Task
     const ACCEPT = 'accept';
     const REJECT = 'reject';
 
-    public $currentStatus;
+    protected $currentStatus;
     public $statusMap = [];
     public $actionMap = [];
     public $workerID;
@@ -35,12 +35,13 @@ class Task
             self::ACCEPT => 'Выполнено',
             self::REJECT => 'Отказаться'
         ];
+        $this->currentStatus = self::STATUS_NEW;
     }
 
 
-    public function getStatus($status)
+    public function getStatus()
     {
-        return $this->currentStatus = $this->statusMap[$status];
+        return $this->currentStatus;
     }
 
     public function getNextStatus($action)
@@ -69,11 +70,11 @@ class Task
     public function getWorkerAction()
     {
         switch ($this->currentStatus) {
-            case 'Новое':
+            case self::STATUS_NEW :
             {
                 return self::TAKE;
             }
-            case 'В работе':
+            case self::STATUS_IN_PROGRESS :
             {
                 return self::REJECT;
             }
@@ -84,11 +85,11 @@ class Task
     public function getCustomerAction()
     {
         switch ($this->currentStatus) {
-            case 'Новое':
+            case self::STATUS_NEW :
             {
                 return self::CANCEL;
             }
-            case 'В работе':
+            case self::STATUS_IN_PROGRESS :
             {
                 return self::ACCEPT;
             }
@@ -96,35 +97,4 @@ class Task
         }
         return null;
     }
-
-/*    public function getWorkerAction()
-    {
-        switch ($this->currentStatus) {
-            case self::STATUS_NEW :
-            {
-                return self::TAKE;
-            }
-            case self::STATUS_IN_PROGRESS :
-            {
-                return self::REJECT;
-            }
-        }
-        return null;
-    }*/
-
-    /*public function getCustomerAction()
-    {
-        switch ($this->currentStatus) {
-            case self::STATUS_NEW :
-            {
-                return self::CANCEL;
-            }
-            case self::STATUS_IN_PROGRESS :
-            {
-                return self::ACCEPT;
-            }
-
-        }
-        return null;
-    }*/
 }
