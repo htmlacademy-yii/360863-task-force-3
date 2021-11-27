@@ -12,7 +12,7 @@ class Task
     const ACCEPT = 'accept';
     const REJECT = 'reject';
 
-    protected $currentStatus;
+    public $currentStatus;
     public $statusMap = [];
     public $actionMap = [];
     public $workerID;
@@ -38,9 +38,9 @@ class Task
     }
 
 
-    public function getStatus()
+    public function getStatus($status)
     {
-        return $this->currentStatus;
+        return $this->currentStatus = $this->statusMap[$status];
     }
 
     public function getNextStatus($action)
@@ -69,11 +69,11 @@ class Task
     public function getWorkerAction()
     {
         switch ($this->currentStatus) {
-            case self::STATUS_NEW :
+            case 'Новое':
             {
                 return self::TAKE;
             }
-            case self::STATUS_IN_PROGRESS :
+            case 'В работе':
             {
                 return self::REJECT;
             }
@@ -84,9 +84,40 @@ class Task
     public function getCustomerAction()
     {
         switch ($this->currentStatus) {
+            case 'Новое':
+            {
+                return self::CANCEL;
+            }
+            case 'В работе':
+            {
+                return self::ACCEPT;
+            }
+
+        }
+        return null;
+    }
+
+/*    public function getWorkerAction()
+    {
+        switch ($this->currentStatus) {
             case self::STATUS_NEW :
             {
-                return [self::CANCEL];
+                return self::TAKE;
+            }
+            case self::STATUS_IN_PROGRESS :
+            {
+                return self::REJECT;
+            }
+        }
+        return null;
+    }*/
+
+    /*public function getCustomerAction()
+    {
+        switch ($this->currentStatus) {
+            case self::STATUS_NEW :
+            {
+                return self::CANCEL;
             }
             case self::STATUS_IN_PROGRESS :
             {
@@ -95,5 +126,5 @@ class Task
 
         }
         return null;
-    }
+    }*/
 }
