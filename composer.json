@@ -1,0 +1,17 @@
+{
+    "name": "leonid/360863-task-force-3",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "taskForce\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Leonid",
+            "email": "alraun_work@mail.ru"
+        }
+    ],
+
+    "require": {}
+}
