@@ -1,6 +1,7 @@
 <?php
 
 require_once "vendor/autoload.php";
+use App\Statuses\Task;
 
 $task = new Task(3);
 if($task->getNextStatus('cancel') === Task::STATUS_CANCELLED){echo 'Проверка 1 удалась' . '<br>';}

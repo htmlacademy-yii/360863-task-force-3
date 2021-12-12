@@ -1,6 +1,6 @@
 <?php
 
-namespace taskForce\statuses;
+namespace App\Statuses;
 
 class Task
 {
